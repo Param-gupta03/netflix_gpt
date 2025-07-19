@@ -1,6 +1,15 @@
 # Netflix_Gpt
 - install vite-raect
 - Cinstall tailwind 
+- header
+- rounting app 
+- login form 
+- sign up from 
+- form validation 
+- useRef
+- Firebase Setup 
+- deploying our app to production 
+- create signup user 
 
 # features
 - login/sign up
