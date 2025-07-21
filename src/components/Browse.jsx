@@ -6,10 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
+import usePopularMovies from '../hooks/usePopularMovies';
+import useTopRatedMovies from '../hooks/useTopRatedMovies';
+import useUpComingMovies from '../hooks/useUpcomingMovies';
 
 const Browse = () => {
 
   useNowPlayingMovies();
+  usePopularMovies();
+  useUpComingMovies();
+  useTopRatedMovies();
  
   const navigate=useNavigate();
   const HandleSignOut = async () => {
@@ -24,9 +30,9 @@ const Browse = () => {
   }
 
   return (
-    <div>
+    <div >
 
-      <div className='absolute w-full flex justify-between bg-gradient-to-b from-black'>
+      <div className='absolute z-10 w-screen flex justify-between bg-gradient-to-b from-black'>
         <div >
           <Header />
         </div>
