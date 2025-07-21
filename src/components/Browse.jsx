@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
 import { auth } from '../utils/FireBase'
 import { signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
+import MainContainer from './MainContainer';
+import SecondaryContainer from './SecondaryContainer';
 
 const Browse = () => {
+
+  useNowPlayingMovies();
+ 
   const navigate=useNavigate();
   const HandleSignOut = async () => {
     try {
       await signOut(auth);
       console.log("User signed out successfully");
+      
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
@@ -18,8 +25,9 @@ const Browse = () => {
 
   return (
     <div>
-      <div className='flex justify-between bg-black'>
-        <div>
+
+      <div className='absolute w-full flex justify-between bg-gradient-to-b from-black'>
+        <div >
           <Header />
         </div>
         <div>
@@ -30,6 +38,9 @@ const Browse = () => {
           </button>
         </div>
       </div>
+      <MainContainer/>
+      <SecondaryContainer/>
+
     </div>
   )
 }

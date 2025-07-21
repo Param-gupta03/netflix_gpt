@@ -3,6 +3,7 @@ import Header from './Header';
 import { checkValidData } from '../utils/validate';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../utils/FireBase';
+import { BACK_IMAGE } from '../utils/constants';
 
 const Login = () => {
   const provider = new GoogleAuthProvider();
@@ -45,7 +46,7 @@ const Login = () => {
       <div className="absolute inset-0">
         <img
           className="h-full w-full object-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/7d2359a4-434f-4efa-9ff3-e9d38a8bde7f/web/IN-en-20250707-TRIFECTA-perspective_4faa9280-a2c5-4e07-aafc-a45ce43fea09_large.jpg"
+          src={BACK_IMAGE}
           alt="Background"
         />
       </div>
