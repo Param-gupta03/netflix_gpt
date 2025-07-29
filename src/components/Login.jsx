@@ -85,7 +85,7 @@ const Login = () => {
     bg-blue-500 hover:bg-blue-600
     text-white font-semibold
     rounded-md shadow
-    transition duration-200 ease-in-out">Sign in with Google</button>
+    transition duration-200 ease-in-out cursor-pointer">Sign in with Google</button>
     
       </form>
     </div>

@@ -10,6 +10,7 @@
 - Firebase Setup 
 - deploying our app to production 
 - create signup user 
+- Now its time for gpt
 
 # features
 - login/sign up

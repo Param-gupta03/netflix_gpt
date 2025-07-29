@@ -9,8 +9,18 @@ import SecondaryContainer from './SecondaryContainer';
 import usePopularMovies from '../hooks/usePopularMovies';
 import useTopRatedMovies from '../hooks/useTopRatedMovies';
 import useUpComingMovies from '../hooks/useUpcomingMovies';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import GptSearch from './GptSearch';
 
 const Browse = () => {
+  
+  const showGPT=useSelector((store)=>store.gpt.showGptSearch);
+
+  const dispatch=useDispatch();
+  const handleGPT=()=>{
+    dispatch(toggleGptSearchView());
+  }
 
   useNowPlayingMovies();
   usePopularMovies();
@@ -36,16 +46,25 @@ const Browse = () => {
         <div >
           <Header />
         </div>
+        
         <div>
+          <button className='font-bold text-white text-xl p-4 bg-purple-800 rounded-3xl cursor-pointer'
+          onClick={handleGPT}
+          >GPTSearch</button>
           <button
             onClick={HandleSignOut}
-            className='font-bold text-white text-xl p-4 bg-blue-500 m-5 rounded-3xl hover:bg-blue-600'>
+            className='font-bold text-white text-xl p-4 bg-red-600 m-5 rounded-3xl hover:bg-red-900 cursor-pointer'>
             Sign Out
           </button>
         </div>
       </div>
+      {showGPT?(<GptSearch/>)
+      :
+      (<>
       <MainContainer/>
       <SecondaryContainer/>
+      </>)}
+      
 
     </div>
   )

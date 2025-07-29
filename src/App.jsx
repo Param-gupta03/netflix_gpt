@@ -7,6 +7,7 @@ import appStore from './utils/appStore';
 import Login from './components/Login';
 import Browse from './components/Browse';
 import Body from './components/Body'; // handles auth logic
+import MovieData from './components/MovieData';
 
 const appRouter = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const appRouter = createBrowserRouter([
         path: '/browse',
         element: <Browse />,
       },
+      {
+        path: '/movieData/:movieId',
+        element:<MovieData/>
+      }
     ],
   },
 ]);
