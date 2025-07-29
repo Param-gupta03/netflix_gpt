@@ -1,22 +1,51 @@
 import React, { useRef } from 'react';
 import openai from '../utils/openai';
-
+import { OPTIONS } from '../utils/constants';
+import { useDispatch } from 'react-redux';
+import { addGptMovieResult } from "../utils/gptSlice";
 const GptSearchBar = () => {
   const searchText=useRef(null);
+  const dispatch=useDispatch();
+
+  const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      OPTIONS
+    );
+    const json = await data.json();
+
+    return json.results;
+  };
+
+
   const handleGptSearchClick=async()=>{
-    console.log(searchText.current.value);
+    
     //make call to gpt api to get move result
-    const gptQuery="Act as a Movie Recommendarion system and suggest some movies for the query: "+searchText.current.value+". only give me name of 5 moives , coma seperated like the example result given ahead. Example resulr: Gadar, Sholay, Don, Race, Golmaal"
+    const gptQuery="Act as a Movie Recommendarion system and suggest some movies for the query: "+searchText.current.value+". only give me name of 5 moives , coma seperated like the example result given ahead. Example result: Gadar, Sholay, Don, Race, Golmaal"
     const gptResult=await openai.chat.completions.create({
       messages:[{role:"user",content:gptQuery}],
       model: "gpt-4o-mini",
     });
-    console.log(gptResult.choices);
+    
+    const gptMovies=gptResult.choices?.[0]?.message?.content.split(",");
+    
+    //for each movie we will find TMDB api
+    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+    // [Promise, Promise, Promise, Promise, Promise]
+
+    const tmdbResults = await Promise.all(promiseArray);
+
+    
+    dispatch(
+      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+    );
 
   }
   return (
-    <div className="flex justify-center pt-[20%] px-4">
-      <form className="bg-black bg-opacity-80 flex w-full max-w-2xl rounded-full overflow-hidden shadow-lg" onSubmit={(e)=>e.preventDefault()}>
+    <div className="flex justify-center pt-[10%] pb-[5%] px-4">
+      <form className="bg-black flex w-full max-w-3xl rounded-full overflow-hidden shadow-lg" onSubmit={(e)=>e.preventDefault()}>
         <input
           ref={searchText}
           type="text"

@@ -36,7 +36,7 @@ const MovieData = () => {
             onClick={() => navigate('/browse')}
             className="bg-red-600 hover:bg-red-700 px-5 py-2 rounded-full font-semibold transition duration-300"
           >
-            ← Go to Browse
+           Home
           </button>
         </div>
       </div>

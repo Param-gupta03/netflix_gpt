@@ -50,10 +50,10 @@ const Browse = () => {
         <div>
           <button className='font-bold text-white text-xl p-4 bg-purple-800 rounded-3xl cursor-pointer'
           onClick={handleGPT}
-          >GPTSearch</button>
+          >{showGPT?("Home Page"):("GptSearch")}</button>
           <button
             onClick={HandleSignOut}
-            className='font-bold text-white text-xl p-4 bg-red-600 m-5 rounded-3xl hover:bg-red-900 cursor-pointer'>
+            className='font-bold text-white text-xl p-4 bg-blue-500 m-5 rounded-3xl hover:bg-blue-600 cursor-pointer'>
             Sign Out
           </button>
         </div>

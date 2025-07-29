@@ -4,9 +4,8 @@ import MovieCard from './MovieCard';
 import { useNavigate } from 'react-router-dom';
 
 const MovieList = ({ title, movies }) => {
-     const navigate = useNavigate();
+    const navigate=useNavigate();
     if(movies==null)return;
-
     return (
         <div className='py-4'>
             <div>
@@ -14,8 +13,8 @@ const MovieList = ({ title, movies }) => {
             <div className='flex overflow-x-scroll hide-scrollbar scroll-smooth'>
             <div className='flex'>
                 {movies.map((movie) => (
-                    <MovieCard key={movie.id} posterPath={movie.poster_path} movieId={movie.id}  
-                    onClick={() => navigate(`/movieData/${movie.id}`)}/>
+                    <MovieCard key={movie.id} posterPath={movie.poster_path} vote={movie.vote_average}
+                    onClick={() => navigate(`/movieData/${movie.id}`)} />
                 ))}
             </div>
             </div>

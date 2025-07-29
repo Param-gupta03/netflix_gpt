@@ -2,11 +2,10 @@ import React from 'react'
 import { IMG_CDN } from '../utils/constants'
 import MovieData from './MovieData'
 
-const MovieCard = ({posterPath,onClick}) => {
+const MovieCard = ({posterPath,onClick,vote}) => {
 
-  const cardData=()=>{
-    
-  }
+  if(!posterPath||vote<5)return;
+  
     return (
     <div className='w-50 p-2 hover:scale-94 transform transition duration-200 ease-in-out cursor-pointer'
     onClick={onClick}>
