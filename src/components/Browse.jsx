@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Header from './Header'
-import { auth } from '../utils/FireBase'
+import { auth } from '../utils/Auth'
 import { signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';

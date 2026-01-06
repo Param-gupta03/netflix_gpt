@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Header from './Header';
 import { checkValidData } from '../utils/validate';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from '../utils/FireBase';
+import { auth } from '../utils/Auth';
 import { BACK_IMAGE } from '../utils/constants';
 
 const Login = () => {
