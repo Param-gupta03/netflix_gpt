@@ -3,9 +3,13 @@ import openai from '../utils/openai';
 import { OPTIONS } from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import { addGptMovieResult } from "../utils/gptSlice";
+import { GoogleGenAI } from "@google/genai";
 const GptSearchBar = () => {
   const searchText=useRef(null);
   const dispatch=useDispatch();
+  const ai = new GoogleGenAI({
+    apiKey: import.meta.env.VITE_GEMINI_KEY,
+  });
 
   const searchMovieTMDB = async (movie) => {
     const data = await fetch(
@@ -24,12 +28,26 @@ const GptSearchBar = () => {
     
     //make call to gpt api to get move result
     const gptQuery="Act as a Movie Recommendarion system and suggest some movies for the query: "+searchText.current.value+". only give me name of 5 moives , coma seperated like the example result given ahead. Example result: Gadar, Sholay, Don, Race, Golmaal"
-    const gptResult=await openai.chat.completions.create({
-      messages:[{role:"user",content:gptQuery}],
-      model: "gpt-4o-mini",
+     const gptResult = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: gptQuery }],
+        },
+      ],
     });
+   
+   
+   
+   
+   
+    // const gptResult=await openai.chat.completions.create({
+    //   messages:[{role:"user",content:gptQuery}],
+    //   model: "gpt-4o-mini",
+    // });
     
-    const gptMovies=gptResult.choices?.[0]?.message?.content.split(",");
+    const gptMovies=gptResult?.candidates[0]?.content?.parts[0]?.text.split(",");
     
     //for each movie we will find TMDB api
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
