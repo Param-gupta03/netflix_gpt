@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
-import usePopularMovies from '../hooks/usePopularMovies';
-import useTopRatedMovies from '../hooks/useTopRatedMovies';
-import useUpComingMovies from '../hooks/useUpcomingMovies';
+import usePopularMovies from '../hooks/usePopularMovies.jsx';
+import useTopRatedMovies from '../hooks/useTopRatedMovies.jsx';
+import useUpComingMovies from '../hooks/useUpComingMovies.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleGptSearchView } from '../utils/gptSlice';
+import { toggleGptSearchView } from '../utils/gptSlice.js';
 import GptSearch from './GptSearch';
 
 const Browse = () => {
